@@ -1,7 +1,7 @@
 name: beautiful_ui_components
-description: A new Flutter package project.
+description: Flutter package that speeds up the UI development by providing the most common UI components.
 version: 0.0.1
-homepage: null
+homepage: https://github.com/i-maple/beautiful_ui_components
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
