@@ -1,3 +1,2 @@
-## 0.0.1
-
-* TODO: Describe initial release.
+## 0.0.1 - 2022-10-29
+* Added text field and button to the package
