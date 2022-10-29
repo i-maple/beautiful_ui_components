@@ -1,7 +1,4 @@
 library beautiful_ui_components;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'src/text_fields/input_text_field.dart';
+export 'src/buttons/filled_button.dart';
