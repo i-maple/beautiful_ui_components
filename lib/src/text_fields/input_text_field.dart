@@ -1,47 +1,50 @@
 import 'package:flutter/material.dart';
 
 class TextInputField extends StatefulWidget {
-  TextInputField(
+  const TextInputField(
       {Key? key,
-      required this.placeholder,
+      this.placeholder = '',
       this.isPassword = false,
-      required this.borderColor,
-      this.showPassword = false,
+      this.borderColor = Colors.transparent,
       this.keyboardType = TextInputType.text,
-      required this.controller})
+      this.borderWidth = 1,
+      this.validator,
+      this.controller})
       : super(key: key);
   final String placeholder;
   final bool isPassword;
   final Color borderColor;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType keyboardType;
-  bool showPassword;
+  final double borderWidth;
+  final String? Function(String?)? validator;
 
   @override
   State<TextInputField> createState() => _TextInputFieldState();
 }
 
 class _TextInputFieldState extends State<TextInputField> {
+  bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         TextFormField(
           keyboardType: widget.keyboardType,
-          obscureText: widget.showPassword,
+          obscureText: showPassword,
           controller: widget.controller,
           decoration: InputDecoration(
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: widget.borderColor)),
+                  borderSide: BorderSide(color: widget.borderColor, width: widget.borderWidth)),
               focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: widget.borderColor)),
+                  borderSide: BorderSide(color: widget.borderColor, width: widget.borderWidth)),
               label: Text(
                 widget.placeholder,
                 style: TextStyle(color: widget.borderColor),
               )),
-          validator: (value) {
+          validator: widget.validator ?? (value) {
             if (value == null || value.isEmpty) {
               return '${widget.placeholder} can\'t be null';
             }
@@ -60,12 +63,12 @@ class _TextInputFieldState extends State<TextInputField> {
                     IconButton(
                         onPressed: () {
                           setState(() {
-                            widget.showPassword = !widget.showPassword;
+                            showPassword = showPassword;
                           });
                         },
                         icon: Icon(
                           Icons.remove_red_eye,
-                          color: widget.showPassword
+                          color: showPassword
                               ? Colors.grey
                               : widget.borderColor,
                         )),
