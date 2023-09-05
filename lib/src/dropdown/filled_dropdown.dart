@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FilledDropdown extends StatefulWidget {
-  FilledDropdown(
+  const FilledDropdown(
       {Key? key,
       required this.items,
       required this.initValue,
@@ -11,7 +11,7 @@ class FilledDropdown extends StatefulWidget {
       : super(key: key);
 
   final List items;
-  String initValue;
+  final String initValue;
   final Color color;
   final Color textColor;
   final Color iconColor;
@@ -21,6 +21,11 @@ class FilledDropdown extends StatefulWidget {
 }
 
 class _FilledDropdownState extends State<FilledDropdown> {
+  String get subInitValue => widget.initValue;
+  set subInitValue(String value) {
+    subInitValue = value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +46,7 @@ class _FilledDropdownState extends State<FilledDropdown> {
             .toList(),
         onChanged: (value) {
           setState(() {
-            widget.initValue = value.toString();
+            subInitValue = value.toString();
           });
         },
       ),
